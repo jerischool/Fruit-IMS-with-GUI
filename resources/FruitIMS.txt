@@ -1,0 +1,15 @@
+Fruit Name: Apple
+Quantity: 200
+Price per Unit ($): 1.0
+Average Weight(g): 150.0
+
+Fruit Name: Strawberry
+Quantity: 505
+Price per Unit ($): 0.18
+Average Weight(g): 15.0
+
+Fruit Name: Watermelon
+Quantity: 50
+Price per Unit ($): 10.0
+Average Weight(g): 1000.0
+
