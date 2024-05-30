@@ -37,12 +37,6 @@ public class UserTable {
                     + "Password VARCHAR(100) NOT NULL)";
             statement.executeUpdate(createUserTableQuery);
 
-            String insertUsersQuery = "INSERT INTO Users (Username, Password) VALUES "
-                    + "('user1', 'password1'), "
-                    + "('user2', 'password2'), "
-                    + "('user3', 'password3')";
-            statement.executeUpdate(insertUsersQuery);
-            System.out.println("Users table created and initial data inserted successfully.");
         } catch (SQLException ex) {
             System.out.println("Error creating Users table: " + ex.getMessage());
         }

@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FruitProcessingApplication {
-    
+
     public static void main(String[] args) {
         DBManager dbManager = new DBManager();
         Connection connection = dbManager.getConnection();
@@ -25,12 +25,15 @@ public class FruitProcessingApplication {
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 try {
-                    System.out.println("Choose an option: ");
+                    System.out.println("\nChoose an option: ");
                     System.out.println("1. Add Fruit");
                     System.out.println("2. Remove Fruit");
                     System.out.println("3. Edit Fruit Description");
-                    System.out.println("4. Display Fruits Table");
-                    System.out.println("5. Exit");
+                    System.out.println("4. Add User");
+                    System.out.println("5. Remove User");
+                    System.out.println("6. Edit User Profile");
+                    System.out.println("7. Display Fruits Table");
+                    System.out.println("8. Exit\n");
 
                     int choice = scanner.nextInt();
 
@@ -45,9 +48,18 @@ public class FruitProcessingApplication {
                             EditFruitDesc.editFruitDesc(connection);
                             break;
                         case 4:
-                            displayFruitsTable(connection);
+                            AddRemoveUser.addUser(connection);
                             break;
                         case 5:
+                            AddRemoveUser.removeUser(connection);
+                            break;
+                        case 6:
+                            EditUserProf.editUserProf(connection);
+                            break;
+                        case 7:
+                            displayFruitsTable(connection);
+                            break;
+                        case 8:
                             dbManager.closeConnections();
                             System.exit(0);
                             break;

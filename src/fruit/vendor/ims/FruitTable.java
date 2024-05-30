@@ -40,13 +40,6 @@ public class FruitTable {
             statement.executeUpdate(createFruitTableQuery);
             System.out.println("Fruits table created successfully.");
 
-            // Insert initial data
-            String insertFruitsQuery = "INSERT INTO Fruits (Name, Quantity, Price, AverageWeight) VALUES "
-                    + "('Apple', 200, 1.0, 150), "
-                    + "('Strawberry', 500, 0.18, 15), "
-                    + "('Watermelon', 50, 10, 1000)";
-            statement.executeUpdate(insertFruitsQuery);
-            System.out.println("Initial fruits data inserted successfully.");
         } catch (SQLException ex) {
             System.out.println("Error creating Fruits table: " + ex.getMessage());
         }

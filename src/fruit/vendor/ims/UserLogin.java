@@ -14,6 +14,11 @@ public class UserLogin {
 
     public static boolean isValidUser(Connection connection) {
         Scanner scanner = new Scanner(System.in);
+        
+         if(isUserTableEmpty(connection)){
+            System.out.println("No users exist. Please create a user");
+            AddRemoveUser.addUser(connection);
+        }
 
         for (int attempts = 0; attempts < MAX_ATTEMPTS; attempts++) {
             System.out.println("Enter username: ");
@@ -38,5 +43,18 @@ public class UserLogin {
             }
         }
         return false; // Maximum attempts reached
+    }
+    
+    private static boolean isUserTableEmpty(Connection connection) {
+        String checkUserQuery = "SELECT COUNT(*) FROM Users";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(checkUserQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+            return count == 0;
+        } catch (SQLException ex) {
+            System.out.println("Error adding user: " + ex.getMessage());
+            return false;
+        }
     }
 }
