@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.sql.ResultSet;
 
 public class AddRemoveFruit {
-
+//test comment2
     public static void addFruit(Connection connection) {
         Scanner scan = new Scanner(System.in);
 
