@@ -14,7 +14,8 @@ public class DBManager {
 
     private Connection conn;
 
-    DBManager() {
+    DBManager() 
+    {
         establishConnection();
     }
 

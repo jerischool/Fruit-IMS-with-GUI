@@ -7,17 +7,21 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.ResultSet;
 
-public class AddRemoveFruit {
-//test comment2
-    public static void addFruit(Connection connection) {
+public class AddRemoveFruit 
+{
+
+    public static void addFruit(Connection connection) 
+    {
         Scanner scan = new Scanner(System.in);
 
-        try {
+        try 
+        {
             System.out.println("Enter the name of the new Fruit: ");
             String name = scan.nextLine();
 
             // Check if the fruit already exists in the table
-            if (isFruitExists(connection, name)) {
+            if (isFruitExists(connection, name)) 
+            {
                 System.out.println("The fruit already exists in the inventory.");
                 return;
             }
@@ -32,7 +36,8 @@ public class AddRemoveFruit {
             double averageWeight = scan.nextDouble();
 
             String insertFruitQuery = "INSERT INTO Fruits (Name, Quantity, Price, AverageWeight) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(insertFruitQuery)) {
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(insertFruitQuery)) 
+            {
                 preparedStatement.setString(1, name);
                 preparedStatement.setInt(2, quantity);
                 preparedStatement.setDouble(3, price);
@@ -40,14 +45,18 @@ public class AddRemoveFruit {
                 preparedStatement.executeUpdate();
                 System.out.println(name + " added successfully!");
             }
-        } catch (SQLException ex) {
+        } 
+            catch (SQLException ex)   
+        {
             System.out.println("Error adding fruit: " + ex.getMessage());
         }
     }
 
-    private static boolean isFruitExists(Connection connection, String fruitName) throws SQLException {
+    private static boolean isFruitExists(Connection connection, String fruitName) throws SQLException 
+    {
         String checkFruitQuery = "SELECT COUNT(*) FROM Fruits WHERE Name = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(checkFruitQuery)) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(checkFruitQuery)) 
+        {
             preparedStatement.setString(1, fruitName);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -56,26 +65,32 @@ public class AddRemoveFruit {
         }
     }
 
-    public static void removeFruit(Connection connection) {
+    public static void removeFruit(Connection connection) 
+    {
         Scanner scanner = new Scanner(System.in);
-        try {
+        try 
+        {
             System.out.println("Enter the name of the fruit to remove:");
             String name = scanner.nextLine();
-
             String deleteFruitQuery = "DELETE FROM Fruits WHERE Name = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteFruitQuery)) {
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(deleteFruitQuery)) 
+            {
                 preparedStatement.setString(1, name);
                 int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
+                if (rowsAffected > 0) 
+                {
                     System.out.println(name + " removed successfully!");
-                } else {
+                } 
+                else 
+                {
                     System.out.println(name + " not found in the inventory.");
                 }
             }
-        } catch (SQLException ex) {
+        } 
+            catch (SQLException ex) 
+        {
             System.out.println("Error removing fruit: " + ex.getMessage());
         }
     }
 }
 
-// test comment - Jeri

@@ -33,7 +33,8 @@ public class FruitProcessingApplication {
                     System.out.println("5. Remove User");
                     System.out.println("6. Edit User Profile");
                     System.out.println("7. Display Fruits Table");
-                    System.out.println("8. Exit\n");
+                    System.out.println("8. Display Users Table");
+                    System.out.println("9. Exit\n");
 
                     int choice = scanner.nextInt();
 
@@ -60,6 +61,9 @@ public class FruitProcessingApplication {
                             displayFruitsTable(connection);
                             break;
                         case 8:
+                            displayUsersTable(connection);
+                            break;
+                        case 9:
                             dbManager.closeConnections();
                             System.exit(0);
                             break;
@@ -75,6 +79,25 @@ public class FruitProcessingApplication {
         dbManager.closeConnections();
     }
 
+    // method to display Users Table (without showing passwords)
+    private static void displayUsersTable(Connection connection) {
+        String query = "SELECT ID, Username FROM Users";
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+            System.out.println("Users Table:");
+            System.out.println("ID\tUsername");
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ID");
+                String username = resultSet.getString("Username");
+                System.out.println(id + "\t" + username);
+            }
+            System.out.println("Users Table displayed successfully."); // Debug print statement
+        } catch (SQLException e) {
+            System.out.println("Error displaying Users table: " + e.getMessage());
+        }
+    }
+
+    
+    // method to display Fruits Table
     private static void displayFruitsTable(Connection connection) {
         String query = "SELECT * FROM Fruits";
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
