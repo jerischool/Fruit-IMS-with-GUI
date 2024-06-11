@@ -5,29 +5,35 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DBManager {
 
-    private static final String URL = "jdbc:derby:FruitIMS_DB; create=true";
+    // database url and credentials
+    private static final String URL = "jdbc:derby:FruitIMS_DB;create=true";
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdc";
 
+    // connection object
     private Connection conn;
 
-    DBManager() 
-    {
+    // constructor to establish a connection when an instance is created
+    DBManager() {
         establishConnection();
     }
 
+    // main method for testing connection
     public static void main(String[] args) {
         DBManager dbManager = new DBManager();
         System.out.println(dbManager.getConnection());
     }
 
+    // method to get the current connection
     public Connection getConnection() {
         return this.conn;
     }
 
+    // method to establish a database connection
     private void establishConnection() {
         try {
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
@@ -36,13 +42,14 @@ public class DBManager {
         }
     }
 
+    // method to close the database connection
     public void closeConnections() {
         if (conn != null) {
             try {
                 conn.close();
-                System.out.println("Connection Closed Successfully ....");
+                JOptionPane.showMessageDialog(null, "Connection Closed Successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
-                System.out.println("Error closing connection: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

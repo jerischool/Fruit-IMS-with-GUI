@@ -1,14 +1,14 @@
 package fruit.vendor.ims;
 
-//check to see if any changes is needed 
 public class Fruit {
 
+    // attributes of the fruit class
     private String name;
     private int quantity;
     private double price;
     private double averageWeight;
 
-    // Constructor for initializing common attributes
+    // constructor for initializing common attributes
     public Fruit(String name, int quantity, double price, double averageWeight) {
         this.name = name;
         this.quantity = quantity;
@@ -16,6 +16,7 @@ public class Fruit {
         this.averageWeight = averageWeight;
     }
 
+    // method to display the description of the fruit
     public void displayDescription() {
         System.out.println("\n" + getName() + ":");
         System.out.println("Quantity: " + getQuantity());
@@ -23,12 +24,12 @@ public class Fruit {
         System.out.println("Average Unit Weight: " + getAverageWeight() + " grams\n");
     }
 
-    // Method to add quantity of fruits
+    // method to add quantity of fruits
     public void addQuantity(int addedQuantity) {
         this.setQuantity(this.getQuantity() + addedQuantity);
     }
 
-    // Method to deduct quantity of fruits
+    // method to deduct quantity of fruits
     public void deductQuantity(int deductedQuantity) {
         if (deductedQuantity <= this.getQuantity()) {
             this.setQuantity(this.getQuantity() - deductedQuantity);
@@ -37,6 +38,7 @@ public class Fruit {
         }
     }
 
+    // getter and setter methods for name
     public String getName() {
         return name;
     }
@@ -45,6 +47,7 @@ public class Fruit {
         this.name = name;
     }
 
+    // getter and setter methods for quantity
     public int getQuantity() {
         return quantity;
     }
@@ -53,6 +56,7 @@ public class Fruit {
         this.quantity = quantity;
     }
 
+    // getter and setter methods for price
     public double getPrice() {
         return price;
     }
@@ -61,6 +65,7 @@ public class Fruit {
         this.price = price;
     }
 
+    // getter and setter methods for average weight
     public double getAverageWeight() {
         return averageWeight;
     }
