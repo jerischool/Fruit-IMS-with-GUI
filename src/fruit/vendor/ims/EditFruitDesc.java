@@ -1,45 +1,36 @@
 package fruit.vendor.ims;
 
-//edit this so that it makes use of the database and have the ability to edit the descriptions of fruits within the table 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class EditFruitDesc {
 
-    public static void editFruitDesc(Connection connection) {
-        Scanner scan = new Scanner(System.in);
+    // connection object to interact with the database
+    private final Connection connection;
 
-        try {
-            System.out.println("Enter the name of the fruit to edit:");
-            String name = scan.nextLine();
+    // constructor to initialize the connection
+    public EditFruitDesc(Connection connection) {
+        this.connection = connection;
+    }
 
-            System.out.println("Enter new price per Unit ($): ");
-            double newPrice = scan.nextDouble();
-
-            System.out.println("Enter new quantity: ");
-            int newQuantity = scan.nextInt();
-
-            System.out.println("Enter new average weight: ");
-            double newAvgWeight = scan.nextDouble();
-
-            String updateFruitQuery = "UPDATE Fruits SET Price = ?, Quantity = ?, AverageWeight = ? WHERE Name = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(updateFruitQuery)) {
-                preparedStatement.setDouble(1, newPrice);
-                preparedStatement.setInt(2, newQuantity);
-                preparedStatement.setDouble(3, newAvgWeight);
-                preparedStatement.setString(4, name);
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println(name + " details updated successfully.");
-                } else {
-                    System.out.println(name + " not found in the inventory.");
-                }
-            }
+    // method to edit the description of a fruit
+    public boolean editFruitDescription(String name, double newPrice, int newQuantity, double newAvgWeight) {
+        // sql query to update fruit details
+        String updateFruitQuery = "UPDATE Fruits SET Price = ?, Quantity = ?, AverageWeight = ? WHERE Name = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateFruitQuery)) {
+            // setting the parameters for the prepared statement
+            preparedStatement.setDouble(1, newPrice);
+            preparedStatement.setInt(2, newQuantity);
+            preparedStatement.setDouble(3, newAvgWeight);
+            preparedStatement.setString(4, name);
+            // executing the update and checking how many rows were affected
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException ex) {
-            System.out.println("Error editing fruit details: " + ex.getMessage());
+            // printing the stack trace if an sql exception occurs
+            ex.printStackTrace();
+            return false;
         }
     }
 }
-
